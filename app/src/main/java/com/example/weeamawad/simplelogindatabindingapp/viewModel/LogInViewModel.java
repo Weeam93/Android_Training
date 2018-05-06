@@ -3,7 +3,6 @@ package com.example.weeamawad.simplelogindatabindingapp.viewModel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.text.TextUtils;
 import android.util.Log;
@@ -48,7 +47,7 @@ public class LogInViewModel extends AndroidViewModel {
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
-    public void attemptLogin(View view) {
+    public void attemptLogin_ClickEvent(View view) {
         //saveUser();
         // Store values at the time of the login attempt.
         if (isUsernameValid() && isPasswordValid()) {
