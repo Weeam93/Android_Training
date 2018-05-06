@@ -122,6 +122,7 @@ public class FileDownloadService extends IntentService {
     }
 
     private Notification buildNotification() {
+
         Intent intent = getPackageManager()
                 .getLaunchIntentForPackage(getPackageName())
                 .setPackage(null)
@@ -130,7 +131,7 @@ public class FileDownloadService extends IntentService {
 
         String title = mIntent.getStringExtra(NOTIFICATION_TITLE_STRING_KEY);
         String message = mIntent.getStringExtra(NOTIFICATION_MESSAGE_STRING_KEY);
-        int iconResource = R.drawable.ic_launcher_background;//mIntent.getIntExtra(NOTIFICATION_ICON_RESOURCE_KEY, 0);
+        int iconResource = R.drawable.ic_launcher_background;
 
 
         mBuilder.setContentTitle(title)
