@@ -12,6 +12,7 @@ import android.util.Log;
 import android.webkit.URLUtil;
 
 import com.example.weeamawad.simplelogindatabindingapp.R;
+import com.example.weeamawad.simplelogindatabindingapp.receiver.DownloadFileServiceReceiver;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -131,6 +132,7 @@ public class FileDownloadService extends IntentService {
         String message = mIntent.getStringExtra(NOTIFICATION_MESSAGE_STRING_KEY);
         int iconResource = R.drawable.ic_launcher_background;//mIntent.getIntExtra(NOTIFICATION_ICON_RESOURCE_KEY, 0);
 
+
         mBuilder.setContentTitle(title)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setWhen(System.currentTimeMillis())
@@ -138,6 +140,14 @@ public class FileDownloadService extends IntentService {
                 .setOngoing(true)
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(iconResource);
+
+        if (mBuilder.mActions.isEmpty()) {
+            //Add Cancel Button and Associate BroadcastReceiver to handle the action
+            Intent intentCancel = new Intent(this, DownloadFileServiceReceiver.class);
+            PendingIntent cancelBroadcastIntent = PendingIntent.getBroadcast(this, (int) System.currentTimeMillis(), intentCancel, PendingIntent.FLAG_CANCEL_CURRENT);
+            NotificationCompat.Action cancelAction = new NotificationCompat.Action(android.R.drawable.ic_menu_close_clear_cancel, "Cancel", cancelBroadcastIntent);
+            mBuilder.addAction(cancelAction);
+        }
         return mBuilder.build();
     }
 
