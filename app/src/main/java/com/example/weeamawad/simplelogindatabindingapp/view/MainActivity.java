@@ -17,33 +17,15 @@ import android.widget.Toast;
 
 import com.example.weeamawad.simplelogindatabindingapp.R;
 import com.example.weeamawad.simplelogindatabindingapp.databinding.ActivityMainBinding;
-import com.example.weeamawad.simplelogindatabindingapp.service.FileDownloadService;
 import com.example.weeamawad.simplelogindatabindingapp.viewModel.MainViewModel;
+
+import service.FileDownloadService;
 
 public class MainActivity extends AppCompatActivity {
     private final String tag = getClass().getSimpleName();
     private MainViewModel mMainViewModel;
 
     private static final int WRITE_EXTERNAL_STORAGE_PERMISSION = 0;
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case WRITE_EXTERNAL_STORAGE_PERMISSION:
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                    Toast.makeText(MainActivity.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
-                }
-                return;
-        }
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +37,14 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(@Nullable Boolean aBoolean) {
                 Log.d(tag, "Received Notification that FileButton Live Data Value has Changed");
                 startFileDownloadService();
+            }
+        });
+
+        mMainViewModel.getShowRecyclerViewBtnClicked().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                Log.d(tag, "Received Notification that ShowRecyclerBtn Live Data Value has Changed");
+                startRecyclerViewAcitvity();
             }
         });
         binding.setMainViewModel(mMainViewModel);
@@ -76,6 +66,25 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case WRITE_EXTERNAL_STORAGE_PERMISSION:
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(MainActivity.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
+                }
+                return;
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
     private void startFileDownloadService() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             // Permission is not granted
@@ -94,4 +103,11 @@ public class MainActivity extends AppCompatActivity {
     private void stopFileDownloadService() {
         stopService(new Intent(this, FileDownloadService.class));
     }
+
+    private void startRecyclerViewAcitvity() {
+        Intent rvActivityIntent = new Intent(this, RecyclerViewActivity.class);
+        startActivity(rvActivityIntent);
+    }
+
+
 }

@@ -1,4 +1,4 @@
-package com.example.weeamawad.simplelogindatabindingapp.receiver;
+package receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

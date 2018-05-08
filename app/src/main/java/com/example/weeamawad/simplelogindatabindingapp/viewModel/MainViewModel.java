@@ -9,24 +9,31 @@ import android.view.View;
  */
 
 public class MainViewModel extends ViewModel {
-    private MutableLiveData<Boolean> mFileDownLoadBtnClicked;
+    private MutableLiveData<Boolean> mFileDownLoadBtnClicked = new MutableLiveData<>();
+    private MutableLiveData<Boolean> mShowRecyclerViewBtnClicked = new MutableLiveData<>();
 
 
     public MutableLiveData<Boolean> getFileDownLoadBtnClicked() {
-        if (mFileDownLoadBtnClicked == null) {
-            mFileDownLoadBtnClicked = new MutableLiveData<>();
-        }
         return mFileDownLoadBtnClicked;
     }
 
     public void setFileDownLoadBtnClicked(Boolean newValue) {
-        if (mFileDownLoadBtnClicked == null) {
-            getFileDownLoadBtnClicked();
-        }
         mFileDownLoadBtnClicked.setValue(newValue);
+    }
+
+    public MutableLiveData<Boolean> getShowRecyclerViewBtnClicked() {
+        return mShowRecyclerViewBtnClicked;
+    }
+
+    public void setShowRecyclerViewBtnClicked(Boolean newValue) {
+        this.mShowRecyclerViewBtnClicked.setValue(newValue);
     }
 
     public void downloadFile_ClickEvent(View view) {
         setFileDownLoadBtnClicked(true);
+    }
+
+    public void showRecyclerView_ClickEvent(View view) {
+        setShowRecyclerViewBtnClicked(true);
     }
 }

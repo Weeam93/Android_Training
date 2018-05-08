@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SimpleLogInDataBindingApp.iml" filepath="$PROJECT_DIR$/SimpleLogInDataBindingApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/weeamcommon/weeamcommon.iml" filepath="$PROJECT_DIR$/weeamcommon/weeamcommon.iml" />
     </modules>
   </component>
 </project>

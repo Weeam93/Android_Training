@@ -1,4 +1,4 @@
-package com.example.weeamawad.simplelogindatabindingapp.service;
+package service;
 
 import android.app.IntentService;
 import android.app.Notification;
@@ -11,9 +11,6 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.webkit.URLUtil;
 
-import com.example.weeamawad.simplelogindatabindingapp.R;
-import com.example.weeamawad.simplelogindatabindingapp.receiver.DownloadFileServiceReceiver;
-
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,6 +19,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
+
+import receiver.DownloadFileServiceReceiver;
 
 /**
  * Created by Weeam Awad on 5/5/2018.
@@ -131,7 +130,7 @@ public class FileDownloadService extends IntentService {
 
         String title = mIntent.getStringExtra(NOTIFICATION_TITLE_STRING_KEY);
         String message = mIntent.getStringExtra(NOTIFICATION_MESSAGE_STRING_KEY);
-        int iconResource = R.drawable.ic_launcher_background;
+        int iconResource = mIntent.getIntExtra(NOTIFICATION_ICON_RESOURCE_KEY, 0);
 
 
         mBuilder.setContentTitle(title)
