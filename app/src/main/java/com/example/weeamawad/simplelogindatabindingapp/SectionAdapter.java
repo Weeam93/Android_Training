@@ -8,7 +8,10 @@ import android.widget.TextView;
 
 import com.example.weeamawad.simplelogindatabindingapp.model.Item;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by Weeam Awad on 5/7/2018.
@@ -17,10 +20,29 @@ import java.util.List;
 public class SectionAdapter extends RecyclerView.Adapter {
     private static final int HEADER = 0;
     private static final int OTHER = 1;
-    List<Item> mItemlist;
+    private List<Item> mItemList = new ArrayList<>();
 
     public SectionAdapter(List<Item> itemList) {
-        mItemlist = itemList;
+        categorizeList(itemList);
+    }
+
+    private void categorizeList(List<Item> itemlist) {
+        Map<Item.SportType, List<Item>> sportsCategory = new TreeMap<>();
+        for (Item item : itemlist) {
+            if (!sportsCategory.containsKey(item.getType())) {
+                sportsCategory.put(item.getType(), new ArrayList<Item>());
+            }
+            sportsCategory.get(item.getType()).add(item);
+        }
+
+        for (Item.SportType type : sportsCategory.keySet()) {
+            Item header = new Item("", type);
+            header.setCategoryHeader(true);
+            mItemList.add(header);
+            for (Item item : sportsCategory.get(type)) {
+                mItemList.add(item);
+            }
+        }
     }
 
     public class HeaderViewHolder extends RecyclerView.ViewHolder {
@@ -61,23 +83,23 @@ public class SectionAdapter extends RecyclerView.Adapter {
         switch (holder.getItemViewType()) {
             case HEADER:
                 HeaderViewHolder headerViewHolder = (HeaderViewHolder) holder;
-                headerViewHolder.headerTextView.setText(mItemlist.get(position).getType().name());
+                headerViewHolder.headerTextView.setText(mItemList.get(position).getType().name());
                 break;
             case OTHER:
                 OtherViewHolder otherViewHolder = (OtherViewHolder) holder;
-                otherViewHolder.otherTextView.setText(mItemlist.get(position).getLabel());
+                otherViewHolder.otherTextView.setText(mItemList.get(position).getLabel());
                 break;
         }
     }
 
     @Override
     public int getItemCount() {
-        return mItemlist.size();
+        return mItemList.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position == HEADER) {
+        if (mItemList.get(position).isCategoryHeader()) {
             return HEADER;
         } else {
             return OTHER;

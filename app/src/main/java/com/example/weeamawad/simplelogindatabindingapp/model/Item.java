@@ -9,6 +9,7 @@ public class Item {
     private String mLabel;
     private String mDate;
     private final SportType mType;
+    private boolean isCategoryHeader;
 
     public Item(String label, SportType type) {
         this.mLabel = label;
@@ -35,6 +36,13 @@ public class Item {
         return mType;
     }
 
+    public void setCategoryHeader(boolean categoryHeader) {
+        isCategoryHeader = categoryHeader;
+    }
+
+    public boolean isCategoryHeader() {
+        return isCategoryHeader;
+    }
 
     public enum SportType {
         SOCCER,
