@@ -49,12 +49,26 @@ public class RecyclerViewActivity extends AppCompatActivity {
         mItemList.add(new Item("Liverpool", Item.SportType.SOCCER));
         mItemList.add(new Item("Chelsea", Item.SportType.SOCCER));
         mItemList.add(new Item("Manchester United", Item.SportType.SOCCER));
+        mItemList.add(new Item("Arsenal", Item.SportType.SOCCER));
+        mItemList.add(new Item("Barcelona", Item.SportType.SOCCER));
+        mItemList.add(new Item("Real Madrid", Item.SportType.SOCCER));
+        mItemList.add(new Item("Juventus", Item.SportType.SOCCER));
+        mItemList.add(new Item("Roma", Item.SportType.SOCCER));
+        mItemList.add(new Item("Inter Milan", Item.SportType.SOCCER));
         //Section 2
         mItemList.add(new Item("Cavaliers", Item.SportType.BASKETBALL));
         mItemList.add(new Item("Suns", Item.SportType.BASKETBALL));
+        mItemList.add(new Item("Warriors", Item.SportType.BASKETBALL));
+        mItemList.add(new Item("Jazz", Item.SportType.BASKETBALL));
+        mItemList.add(new Item("Heat", Item.SportType.BASKETBALL));
+        mItemList.add(new Item("Knicks", Item.SportType.BASKETBALL));
         //Section 3
         mItemList.add(new Item("DiamondBacks", Item.SportType.BASEBALL));
         mItemList.add(new Item("Yankees", Item.SportType.BASEBALL));
+        mItemList.add(new Item("Red Sox", Item.SportType.BASEBALL));
+        mItemList.add(new Item("Dodgers", Item.SportType.BASEBALL));
+        mItemList.add(new Item("Angels", Item.SportType.BASEBALL));
+        mItemList.add(new Item("Mets", Item.SportType.BASEBALL));
 
 
     }

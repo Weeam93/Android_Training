@@ -21,24 +21,29 @@ public class SectionAdapter extends RecyclerView.Adapter {
     private static final int HEADER = 0;
     private static final int OTHER = 1;
     private List<Item> mItemList = new ArrayList<>();
+    Map<Item.SportType, List<Item>> sportsCategory = new TreeMap<>();
 
     public SectionAdapter(List<Item> itemList) {
-        categorizeList(itemList);
+        convertToCategoryMap(itemList);
+        createItemsFromMap();
     }
 
-    private void categorizeList(List<Item> itemlist) {
-        Map<Item.SportType, List<Item>> sportsCategory = new TreeMap<>();
+    private void convertToCategoryMap(List<Item> itemlist) {
         for (Item item : itemlist) {
             if (!sportsCategory.containsKey(item.getType())) {
                 sportsCategory.put(item.getType(), new ArrayList<Item>());
             }
             sportsCategory.get(item.getType()).add(item);
         }
+    }
 
+    private void createItemsFromMap() {
         for (Item.SportType type : sportsCategory.keySet()) {
+            //Add Category Header Item
             Item header = new Item("", type);
             header.setCategoryHeader(true);
             mItemList.add(header);
+            //Add all items for that category
             for (Item item : sportsCategory.get(type)) {
                 mItemList.add(item);
             }
