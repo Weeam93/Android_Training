@@ -43,7 +43,7 @@ public class CustomView extends View {
         TypedArray styles = context.obtainStyledAttributes(attributeSet, R.styleable.CustomView, deStyle, 0);
         mText = styles.getString(R.styleable.CustomView_text);
         mTextPaint.setColor(styles.getColor(R.styleable.CustomView_color, ContextCompat.getColor(context, R.color.black)));
-        mTextPaint.setTextSize(styles.getDimensionPixelSize(R.styleable.CustomView_textSize, getResources().getDimensionPixelSize(R.dimen.large_text_size)));
+        mTextPaint.setTextSize(styles.getDimensionPixelSize(R.styleable.CustomView_textSize, getResources().getDimensionPixelSize(R.dimen.font_size_large)));
         styles.recycle();
     }
 
