@@ -15,11 +15,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.weeamawad.simplelogindatabindingapp.R;
+import com.example.weeam.common.service.FileDownloadService;
 import com.example.weeamawad.simplelogindatabindingapp.databinding.ActivityMainBinding;
+import com.example.weeamawad.simplelogindatabindingapp.R;
 import com.example.weeamawad.simplelogindatabindingapp.viewModel.MainViewModel;
 
-import service.FileDownloadService;
 
 public class MainActivity extends AppCompatActivity {
     private final String tag = getClass().getSimpleName();
